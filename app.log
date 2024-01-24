@@ -1,0 +1,28 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (fsevents)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 393-788-250
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /static/dashboard_stylesheet.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /static/dashboard-script.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /static/dashboard_stylesheet.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /static/dashboard-script.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /api/low_stock_levels HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /api/most_popular_products HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /api/orders_over_time HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /api/revenue_generation HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /api/product_category_popularity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /api/payment_method_popularity HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): archive-api.open-meteo.com:443
+DEBUG:urllib3.connectionpool:https://archive-api.open-meteo.com:443 "GET /v1/archive?latitude=50.6053&longitude=-3.5952&start_date=2023-05-01&end_date=2023-08-31&daily=temperature_2m_max&timezone=GMT HTTP/1.1" 200 None
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 10:31:54] "GET /api/temperature_over_time HTTP/1.1" 200 -
+DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js", inode=17017198, flags=10400, id=12160708): is_file, is_inode_meta_mod
+DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/templates/dashboard.html", inode=17017201, flags=10400, id=12160711): is_file, is_inode_meta_mod
+DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js', is_directory=False>
+DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/templates/dashboard.html', is_directory=False>
+DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/templates/dashboard.html", inode=17017201, flags=11400, id=12160714): is_file, is_inode_meta_mod, is_modified
+DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/templates/dashboard.html', is_directory=False>
+DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js", inode=17017198, flags=11400, id=12160724): is_file, is_inode_meta_mod, is_modified
+DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js', is_directory=False>
