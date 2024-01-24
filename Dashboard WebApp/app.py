@@ -5,13 +5,14 @@ import logging
 import requests  # Importing the requests library
 from flask import request
 
-# Setup logging
+# Setup logging to assist with debugging and monitoring
 logging.basicConfig(filename="app.log", level=logging.DEBUG)
 
 working_directory = pathlib.Path(__file__).parent.absolute()
 DATABASE = working_directory / "CCL_ecommerce.db"
 
-
+# Executes a SQL query on the database and return the result.
+#Parameters to be used in the query and the try and except is a HTTPException in case there is a database error.
 def query_db(query: str, args=()) -> list:
     try:
         with sqlite3.connect(DATABASE) as conn:
@@ -22,20 +23,20 @@ def query_db(query: str, args=()) -> list:
         logging.error("Database error: %s", e)
         abort(500, description="Database error occurred.")
 
-
+#Creates a flask application
 app = Flask(__name__)
 
-
+#Handles 404 Not found errors
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({"error": "Not found"}), 404)
 
-
+#Handles 500 internal server error
 @app.errorhandler(500)
 def internal_error(error):
     return make_response(jsonify({"error": "Internal server error"}), 500)
 
-
+#Defines a route for the URL which renders the dashboard template
 @app.route("/")
 def index() -> str:
     return render_template("dashboard.html")
@@ -43,7 +44,7 @@ def index() -> str:
 
 @app.route("/api/temperature_over_time", methods=["GET"])
 def temperature_over_time():
-    # Fetching the date range from orders_over_time
+    # Fetches the date range from orders_over_time
     query = """
 SELECT MIN(order_date), MAX(order_date)
 FROM orders;
@@ -70,7 +71,7 @@ FROM orders;
         logging.error("Error in /api/temperature_over_time: %s", e)
         abort(500, description="Error fetching temperature data.")
 
-
+#Retrieves the no. of orders over time and returns with a Js response of dates/order amounts.
 @app.route("/api/orders_over_time")
 def orders_over_time() -> Response:
     query = """
@@ -88,7 +89,7 @@ def orders_over_time() -> Response:
         logging.error("Error in /api/orders_over_time: %s", e)
         abort(500, description="Error processing data.")
 
-
+#Retrirved products with low stock levels and returns a JS response with product names and their quantities
 @app.route("/api/low_stock_levels")
 def low_stock_levels() -> Response:
     query = """
@@ -103,7 +104,7 @@ def low_stock_levels() -> Response:
     quantities = [row[1] for row in result]
     return jsonify({"products": products, "quantities": quantities})
 
-
+#Retrieves products with the most sales and returns a JS response with a list of products and which sold the most quanities.
 @app.route("/api/most_popular_products")
 def most_popular_products_new() -> Response:
     query = """
@@ -122,7 +123,7 @@ def most_popular_products_new() -> Response:
     ]
     return jsonify(products)
 
-
+#Generates revenues data based on a date range and returns a JS response with revenues and the corresponding dates
 @app.route("/api/revenue_generation", methods=["GET"])
 def revenue_generation():
     start_date = request.args.get("start_date", None)
@@ -145,7 +146,7 @@ def revenue_generation():
     revenues = [row[1] for row in result]
     return jsonify({"dates": dates, "revenues": revenues})
 
-
+#Retrieves the popularity of product categories based on sales figures. Returns a Js response with the categories and corresponding sales totals.
 @app.route("/api/product_category_popularity")
 def product_category_popularity() -> Response:
     query = """
@@ -162,7 +163,7 @@ def product_category_popularity() -> Response:
     sales = [row[1] for row in result]
     return jsonify({"categories": categories, "sales": sales})
 
-
+#Retrieves the payment method used in relation to the transaction count.
 @app.route("/api/payment_method_popularity")
 def payment_method_popularity() -> Response:
     query = """
@@ -178,6 +179,6 @@ def payment_method_popularity() -> Response:
     counts = [row[1] for row in result]
     return jsonify({"methods": methods, "counts": counts})
 
-
+#Runs the flask app in debug mode if the script is executed directly.
 if __name__ == "__main__":
     app.run(debug=True)
