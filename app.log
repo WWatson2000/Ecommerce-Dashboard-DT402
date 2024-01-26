@@ -131,3 +131,35 @@ DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-ma
 DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard_stylesheet.css', is_directory=False>
 DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard_stylesheet.css", inode=17017199, flags=11400, id=12258437): is_file, is_inode_meta_mod, is_modified
 DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard_stylesheet.css', is_directory=False>
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET /static/dashboard_stylesheet.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "[36mGET /static/dashboard-script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET /api/revenue_generation?start_date=&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET /api/low_stock_levels HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET /api/most_popular_products HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET /api/payment_method_popularity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET /api/product_category_popularity HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): archive-api.open-meteo.com:443
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET /api/orders_over_time HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:https://archive-api.open-meteo.com:443 "GET /v1/archive?latitude=50.6053&longitude=-3.5952&start_date=2023-05-01&end_date=2023-08-31&daily=temperature_2m_max&timezone=GMT HTTP/1.1" 200 None
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:33:34] "GET /api/temperature_over_time HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:34:00] "GET /api/revenue_generation?start_date=2023-04-01&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:34:05] "GET /api/revenue_generation?start_date=2023-04-01&end_date=2023-05-31 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "[36mGET /static/dashboard-script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "[36mGET /static/dashboard_stylesheet.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "[36mGET /static/dashboard_stylesheet.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "[36mGET /static/dashboard-script.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "GET /api/revenue_generation?start_date=&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "GET /api/most_popular_products HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "GET /api/payment_method_popularity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "GET /api/product_category_popularity HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "GET /api/orders_over_time HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:55] "GET /api/low_stock_levels HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): archive-api.open-meteo.com:443
+DEBUG:urllib3.connectionpool:https://archive-api.open-meteo.com:443 "GET /v1/archive?latitude=50.6053&longitude=-3.5952&start_date=2023-05-01&end_date=2023-08-31&daily=temperature_2m_max&timezone=GMT HTTP/1.1" 200 None
+INFO:werkzeug:127.0.0.1 - - [24/Jan/2024 13:57:56] "GET /api/temperature_over_time HTTP/1.1" 200 -
+DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/.DS_Store", inode=17100107, flags=1b500, id=13975572): is_created, is_file, is_inode_meta_mod, is_item_finder_info_modified, is_modified, is_xattr_mod
+DEBUG:fsevents:queue_event <FileCreatedEvent: event_type=created, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/.DS_Store', is_directory=False>
+DEBUG:fsevents:queue_event <DirModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp', is_directory=True>
+DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/.DS_Store', is_directory=False>
