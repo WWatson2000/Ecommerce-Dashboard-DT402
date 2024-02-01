@@ -40,40 +40,41 @@ async function fetchDataAndRenderChart(
 // Function to handle date changes and update the revenue chart
 async function handleRevenueChartDateChange() {
   try {
-    // Fetching the start and end dates from the document
-    const startDate = document.getElementById("start-date").value;
-    const endDate = document.getElementById("end-date").value;
-    // Updating the API endpoint with the date values
-    const updatedApiEndpoint = `/api/revenue_generation?start_date=${startDate}&end_date=${endDate}`;
+      // Fetching the start and end dates from the document
+      const startDate = document.getElementById("start-date").value;
+      const endDate = document.getElementById("end-date").value;
 
-    let response = await fetch(updatedApiEndpoint);
-    let data = await response.json();
+      // Updating the API endpoint with the date values
+      const updatedApiEndpoint = `/api/revenue_generation?start_date=${startDate}&end_date=${endDate}`;
 
-    // Check if an instance of the revenue chart exists
-    if (revenueChartInstance) {
-      // Destroy the existing chart instance to avoid conflicts
-      revenueChartInstance.destroy();
-      revenueChartInstance = null;
-    }
+      let response = await fetch(updatedApiEndpoint);
+      let data = await response.json();
 
-    const ctx = document.getElementById("revenueChart").getContext("2d");
-    // Creating a new chart instance and storing it globally
-    revenueChartInstance = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: data.dates,
-        datasets: [
-          {
-            label: "Total Revenue",
-            data: data.revenues,
-            // ... other config
+      // Check if an instance of the revenue chart exists
+      if (revenueChartInstance) {
+          // Destroy the existing chart instance to avoid conflicts
+          revenueChartInstance.destroy();
+          revenueChartInstance = null;
+      }
+
+      const ctx = document.getElementById("revenueChart").getContext("2d");
+      // Creating a new chart instance and storing it globally
+      revenueChartInstance = new Chart(ctx, {
+          type: "line",
+          data: {
+              labels: data.dates,
+              datasets: [
+                  {
+                      label: "Total Revenue",
+                      data: data.revenues,
+                      // ... other config
+                  },
+              ],
           },
-        ],
-      },
-      // ... other options
-    });
+          // ... other options
+      });
   } catch (error) {
-    console.error("Error fetching or rendering chart:", error);
+      console.error("Error fetching or rendering chart:", error);
   }
 }
 
