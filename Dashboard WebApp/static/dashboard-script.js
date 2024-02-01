@@ -1,42 +1,64 @@
-// Function to fetch data and render chart
-async function fetchDataAndRenderChart(apiEndpoint, chartElementId, chartConfig) {
-  try {
-    // Fetch data
-    let response = await fetch(apiEndpoint);
-    let data = await response.json();
+// Global variable to manage the revenue chart instance
+let revenueChartInstance = null;
 
-    // Get the latest date values
+// Function to fetch data and render a chart
+async function fetchDataAndRenderChart(
+  apiEndpoint,
+  chartElementId,
+  chartConfig
+) {
+  try {
+    // Fetching the start and end dates from the document
     const startDate = document.getElementById("start-date").value;
     const endDate = document.getElementById("end-date").value;
-
-    // Update the API endpoint with the latest date values
+    // Updating the API endpoint with the date values
     const updatedApiEndpoint = `${apiEndpoint}?start_date=${startDate}&end_date=${endDate}`;
 
-    // Render chart
+    let response = await fetch(updatedApiEndpoint);
+    let data = await response.json();
+
+    // Check if we're updating the revenue chart and if an instance exists
+    if (chartElementId === "revenueChart" && revenueChartInstance) {
+      // Destroy the existing chart instance to avoid conflicts
+      revenueChartInstance.destroy();
+      revenueChartInstance = null;
+    }
+
     const ctx = document.getElementById(chartElementId).getContext("2d");
-    new Chart(ctx, chartConfig(data));
+    const newChart = new Chart(ctx, chartConfig(data));
+
+    // If we're updating the revenue chart, store the new instance
+    if (chartElementId === "revenueChart") {
+      revenueChartInstance = newChart;
+    }
   } catch (error) {
     console.error("Error fetching or rendering chart:", error);
   }
 }
 
+
 // Function to handle date changes and update the revenue chart
 async function handleRevenueChartDateChange() {
   try {
-    // Get the latest date values
+    // Fetching the start and end dates from the document
     const startDate = document.getElementById("start-date").value;
     const endDate = document.getElementById("end-date").value;
-
-    // Update the API endpoint with the latest date values
+    // Updating the API endpoint with the date values
     const updatedApiEndpoint = `/api/revenue_generation?start_date=${startDate}&end_date=${endDate}`;
 
-    // Fetch data
     let response = await fetch(updatedApiEndpoint);
     let data = await response.json();
 
-    // Render chart
+    // Check if an instance of the revenue chart exists
+    if (revenueChartInstance) {
+      // Destroy the existing chart instance to avoid conflicts
+      revenueChartInstance.destroy();
+      revenueChartInstance = null;
+    }
+
     const ctx = document.getElementById("revenueChart").getContext("2d");
-    new Chart(ctx, {
+    // Creating a new chart instance and storing it globally
+    revenueChartInstance = new Chart(ctx, {
       type: "line",
       data: {
         labels: data.dates,
@@ -62,8 +84,12 @@ function openFeedbackForm() {
 }
 
 // Add event listener for date picker changes
-document.getElementById("start-date").addEventListener("change", handleRevenueChartDateChange);
-document.getElementById("end-date").addEventListener("change", handleRevenueChartDateChange);
+document
+  .getElementById("start-date")
+  .addEventListener("change", handleRevenueChartDateChange);
+document
+  .getElementById("end-date")
+  .addEventListener("change", handleRevenueChartDateChange);
 
 // Initial revenue chart render on page load
 handleRevenueChartDateChange();
@@ -77,11 +103,9 @@ fetchDataAndRenderChart("/api/orders_over_time", "ordersChart", (data) => ({
       {
         label: "Number of Orders",
         data: data.counts,
-        // ... other config
       },
     ],
   },
-  // ... other options
 }));
 
 fetchDataAndRenderChart("/api/low_stock_levels", "stockChart", (data) => ({
@@ -109,80 +133,92 @@ fetchDataAndRenderChart("/api/low_stock_levels", "stockChart", (data) => ({
   },
 }));
 
-fetchDataAndRenderChart("/api/most_popular_products", "popularProductsChart", (data) => ({
-  type: "bar",
-  data: {
-    labels: data.map((item) => item.product_name),
-    datasets: [
-      {
-        label: "Quantity Sold",
-        data: data.map((item) => item.total_quantity),
-        // ... other config
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-      x: {
-        display: false,
+fetchDataAndRenderChart(
+  "/api/most_popular_products",
+  "popularProductsChart",
+  (data) => ({
+    type: "bar",
+    data: {
+      labels: data.map((item) => item.product_name),
+      datasets: [
+        {
+          label: "Quantity Sold",
+          data: data.map((item) => item.total_quantity),
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+        x: {
+          display: false,
+        },
       },
     },
-  },
-}));
+  })
+);
 
-fetchDataAndRenderChart("/api/product_category_popularity", "categoryPopularityChart", (data) => ({
-  type: "pie",
-  data: {
-    labels: data.categories,
-    datasets: [
-      {
-        label: "Total Sales",
-        data: data.sales,
-        // ... other config
-      },
-    ],
-  },
-}));
+fetchDataAndRenderChart(
+  "/api/product_category_popularity",
+  "categoryPopularityChart",
+  (data) => ({
+    type: "pie",
+    data: {
+      labels: data.categories,
+      datasets: [
+        {
+          label: "Total Sales",
+          data: data.sales,
+        },
+      ],
+    },
+  })
+);
 
-fetchDataAndRenderChart("/api/payment_method_popularity", "paymentMethodChart", (data) => ({
-  type: "pie",
-  data: {
-    labels: data.methods,
-    datasets: [
-      {
-        label: "Transaction Count",
-        data: data.counts,
-        // ... other config
-      },
-    ],
-  },
-  options: {
-    responsive: true,
-    scales: {
-      x: {
-        display: false,
+fetchDataAndRenderChart(
+  "/api/payment_method_popularity",
+  "paymentMethodChart",
+  (data) => ({
+    type: "pie",
+    data: {
+      labels: data.methods,
+      datasets: [
+        {
+          label: "Transaction Count",
+          data: data.counts,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: false,
+        },
       },
     },
-  },
-}));
+  })
+);
 
-fetchDataAndRenderChart("/api/temperature_over_time", "temperatureChart", (data) => ({
-  type: "line",
-  data: {
-    labels: data.daily.time,
-    datasets: [
-      {
-        label: "Temperature (°C)",
-        data: data.daily.temperature_2m_max,
-        borderColor: "rgba(255, 0, 0, 1)",
-        backgroundColor: "rgba(200, 0, 192, 0.2)",
-        fill: false,
-      },
-    ],
-  },
-  // ... other options can be added as needed
-}));
+fetchDataAndRenderChart(
+  "/api/temperature_over_time",
+  "temperatureChart",
+  (data) => ({
+    type: "line",
+    data: {
+      labels: data.daily.time,
+      datasets: [
+        {
+          label: "Temperature (°C)",
+          data: data.daily.temperature_2m_max,
+          borderColor: "rgba(255, 0, 0, 1)",
+          backgroundColor: "rgba(200, 0, 192, 0.2)",
+          fill: false,
+        },
+      ],
+    },
+  })
+);
