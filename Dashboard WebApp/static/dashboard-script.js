@@ -36,28 +36,33 @@ async function fetchDataAndRenderChart(
   }
 }
 
+let defaultStartDate = "2023-05-03";
+let defaultEndDate = "2023-08-29";
+document.getElementById("start-date").value = defaultStartDate;
+document.getElementById("end-date").value = defaultEndDate;
 
 // Function to handle date changes and update the revenue chart
 async function handleRevenueChartDateChange() {
   try {
+      // Fetching the start and end dates from the document
       const startDate = document.getElementById("start-date").value;
       const endDate = document.getElementById("end-date").value;
 
-      // Format the date strings to 'YYYY-MM-DD'
-      const formattedStartDate = new Date(startDate).toISOString().split('T')[0];
-      const formattedEndDate = new Date(endDate).toISOString().split('T')[0];
-
-      const updatedApiEndpoint = `/api/revenue_generation?start_date=${formattedStartDate}&end_date=${formattedEndDate}`;
+      // Updating the API endpoint with the date values
+      const updatedApiEndpoint = `/api/revenue_generation?start_date=${startDate}&end_date=${endDate}`;
 
       let response = await fetch(updatedApiEndpoint);
       let data = await response.json();
 
+      // Check if an instance of the revenue chart exists
       if (revenueChartInstance) {
+          // Destroy the existing chart instance to avoid conflicts
           revenueChartInstance.destroy();
           revenueChartInstance = null;
       }
 
       const ctx = document.getElementById("revenueChart").getContext("2d");
+      // Creating a new chart instance and storing it globally
       revenueChartInstance = new Chart(ctx, {
           type: "line",
           data: {
@@ -66,9 +71,11 @@ async function handleRevenueChartDateChange() {
                   {
                       label: "Total Revenue",
                       data: data.revenues,
+                      // ... other config
                   },
               ],
           },
+          // ... other options
       });
   } catch (error) {
       console.error("Error fetching or rendering chart:", error);
@@ -82,15 +89,18 @@ function openFeedbackForm() {
 }
 
 // Add event listener for date picker changes
-document
-  .getElementById("start-date")
-  .addEventListener("change", handleRevenueChartDateChange);
-document
-  .getElementById("end-date")
-  .addEventListener("change", handleRevenueChartDateChange);
+document.getElementById("start-date").addEventListener("change", handleRevenueChartDateChange);
+document.getElementById("end-date").addEventListener("change", handleRevenueChartDateChange);
 
 // Initial revenue chart render on page load
-handleRevenueChartDateChange();
+document.addEventListener("DOMContentLoaded", () => {
+    // Set default date values
+    document.getElementById("start-date").value = defaultStartDate;
+    document.getElementById("end-date").value = defaultEndDate;
+
+    // Render revenue chart
+    handleRevenueChartDateChange();
+});
 
 // Fetch and render other charts
 fetchDataAndRenderChart("/api/orders_over_time", "ordersChart", (data) => ({
