@@ -303,3 +303,21 @@ DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-ma
 DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/templates/dashboard.html', is_directory=False>
 DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js", inode=17017198, flags=11400, id=20161872): is_file, is_inode_meta_mod, is_modified
 DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js', is_directory=False>
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "[36mGET /static/dashboard_stylesheet.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET /static/dashboard-script.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET /api/revenue_generation?start_date=&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET /api/low_stock_levels?start_date=&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET /api/most_popular_products?start_date=&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET /api/product_category_popularity?start_date=&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET /api/orders_over_time?start_date=&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET /api/payment_method_popularity?start_date=&end_date= HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): archive-api.open-meteo.com:443
+DEBUG:urllib3.connectionpool:https://archive-api.open-meteo.com:443 "GET /v1/archive?latitude=50.6053&longitude=-3.5952&start_date=2023-05-01&end_date=2023-08-31&daily=temperature_2m_max&timezone=GMT HTTP/1.1" 200 None
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:15] "GET /api/temperature_over_time?start_date=&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:21] "GET /api/revenue_generation?start_date=2023-05-01&end_date= HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Feb/2024 14:43:27] "GET /api/revenue_generation?start_date=2023-05-01&end_date=2023-05-26 HTTP/1.1" 200 -
+DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js", inode=17017198, flags=10400, id=20165971): is_file, is_inode_meta_mod
+DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js', is_directory=False>
+DEBUG:fsevents:NativeEvent(path="/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js", inode=17017198, flags=11400, id=20165974): is_file, is_inode_meta_mod, is_modified
+DEBUG:fsevents:queue_event <FileModifiedEvent: event_type=modified, src_path='/Users/charlottewatson/Downloads/DT402-flask-main 2/Dashboard WebApp/static/dashboard-script.js', is_directory=False>
